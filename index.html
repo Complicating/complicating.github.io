@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>f0reshadow</title>
+  <title>Right</title>
   <style>
     body {
       margin: 0;
@@ -46,32 +46,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      /* Remove the gradient border - make it transparent */
+      border: 5px solid transparent;
+      box-sizing: border-box;
     }
 
+    /* Remove the ::before pseudo element and animation for border */
     .highlight-box::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      padding: 5px;
-      background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
-      background-size: 600% 600%;
-      z-index: -1;
-      animation: animate-border 10s ease infinite;
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: destination-out;
-      mask-composite: exclude;
+      content: none;
     }
 
     .highlight-box:hover {
       transform: scale(1.05) rotateY(5deg);
       box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-    }
-
-    @keyframes animate-border {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .title {
@@ -85,36 +72,8 @@
       transform: scale(1.2);
     }
 
-    .roblox-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      margin-top: 15px;
-      transition: transform 0.3s ease;
-    }
-
-    .roblox-link img {
-      width: 40px;
-      height: 40px;
-      transition: transform 0.3s ease, filter 0.3s ease;
-      border-radius: 10px;
-    }
-
-    .roblox-link span {
-      color: white;
-      font-size: 18px;
-    }
-
-    .roblox-link:hover {
-      transform: scale(1.1);
-    }
-
-    .roblox-link:hover img {
-      transform: scale(1.3);
-      filter: drop-shadow(0 0 12px white);
-    }
-
+    .roblox-link,
+    .twitter-link,
     .github-link {
       display: flex;
       align-items: center;
@@ -125,21 +84,43 @@
       cursor: pointer;
     }
 
+    .roblox-link img,
+    .twitter-link img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      border-radius: 10px;
+    }
+
+    .twitter-link img {
+      filter: invert(1); /* Make Twitter icon white */
+    }
+
+    .roblox-link span,
+    .twitter-link span,
+    .github-link span {
+      color: white;
+      font-size: 18px;
+    }
+
+    .roblox-link:hover,
+    .twitter-link:hover,
+    .github-link:hover {
+      transform: scale(1.1);
+    }
+
+    .roblox-link:hover img,
+    .twitter-link:hover img {
+      transform: scale(1.3);
+      filter: drop-shadow(0 0 12px white);
+    }
+
     .github-link svg {
       width: 40px;
       height: 40px;
       transition: transform 0.3s ease, filter 0.3s ease;
       border-radius: 10px;
       fill: white;
-    }
-
-    .github-link span {
-      color: white;
-      font-size: 18px;
-    }
-
-    .github-link:hover {
-      transform: scale(1.1);
     }
 
     .github-link:hover svg {
@@ -150,14 +131,19 @@
 </head>
 <body>
   <div class="highlight-box">
-    <div class="title">Right/Hatred</div>
+    <div class="title">Right</div>
 
-    <a href="https://www.roblox.com/users/4037255/profile" target="_blank" class="roblox-link" title="Visit my Roblox Profile">
-      <img src="https://i.postimg.cc/QMyWBhGY/Logo.webp" alt="Roblox 2011 Icon">
+    <a href="https://www.roblox.com/users/407043957/profile" target="_blank" class="roblox-link" title="Visit my Roblox Profile">
+      <img src="https://i.postimg.cc/QMyWBhGY/Logo.webp" alt="Roblox 2011 Icon" />
       <span>My Roblox Profile</span>
     </a>
 
-    <a href="https://github.com/complicating" target="_blank" class="github-link" title="Visit my GitHub Page">
+    <a href="https://x.com/hatred125" target="_blank" class="twitter-link" title="Visit my Twitter Profile">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter Icon" />
+      <span>My Twitter Profile</span>
+    </a>
+
+    <a href="https://github.com/th5t" target="_blank" class="github-link" title="Visit my GitHub Page">
       <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" fill="currentColor" >
         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
           0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
