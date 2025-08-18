@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Info Box</title>
+  <title></title> <!-- We'll set this dynamically -->
   <style>
     body {
       margin: 0;
@@ -20,7 +20,7 @@
       position: relative;
       width: 55%;
       height: 65%;
-      background: rgba(150, 150, 150, 0.35); /* gray transparent frame */
+      background: rgba(150, 150, 150, 0.35);
       border-radius: 20px;
       backdrop-filter: blur(15px) saturate(160%);
       -webkit-backdrop-filter: blur(15px) saturate(160%);
@@ -30,7 +30,6 @@
       flex-direction: column;
     }
 
-    /* glossy shine overlay */
     .info-box::before {
       content: "";
       position: absolute;
@@ -84,7 +83,6 @@
       background: rgba(255, 255, 255, 0.75);
     }
 
-    /* Scrollbar styling */
     .info-content::-webkit-scrollbar {
       width: 6px;
     }
@@ -106,5 +104,42 @@
       <div class="info-item"> t.me/n00btube to get in contact with me </div>
     </div>
   </div>
+
+  <script>
+    const titles = [
+      "Welcome to My Page!",
+      "I’m hatred125 on X.com",
+      "UI Designer + Scripter",
+      "No save points in my life or my Nintendo 64"
+    ];
+
+    let currentTitle = 0;
+    let charIndex = 0;
+    let typingForward = true;
+
+    function typeTitle() {
+      const title = titles[currentTitle];
+
+      if (typingForward) {
+        charIndex++;
+        if (charIndex > title.length) {
+          typingForward = false;
+          setTimeout(typeTitle, 1500); // pause before deleting
+          return;
+        }
+      } else {
+        charIndex--;
+        if (charIndex === 0) {
+          typingForward = true;
+          currentTitle = (currentTitle + 1) % titles.length;
+        }
+      }
+
+      document.title = title.slice(0, charIndex);
+      setTimeout(typeTitle, typingForward ? 150 : 75);
+    }
+
+    typeTitle();
+  </script>
 </body>
 </html>
