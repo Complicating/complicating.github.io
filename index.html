@@ -17,16 +17,34 @@
     }
 
     .info-box {
-      width: 50%;
-      height: 60%;
-      background: rgba(0, 200, 255, 0.3);
+      position: relative;
+      width: 55%;
+      height: 65%;
+      background: rgba(150, 150, 150, 0.35); /* gray transparent frame */
       border-radius: 20px;
-      backdrop-filter: blur(10px) saturate(150%);
-      -webkit-backdrop-filter: blur(10px) saturate(150%);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(15px) saturate(160%);
+      -webkit-backdrop-filter: blur(15px) saturate(160%);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
       overflow: hidden;
       display: flex;
       flex-direction: column;
+    }
+
+    /* glossy shine overlay */
+    .info-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.35),
+        rgba(255, 255, 255, 0.05) 70%
+      );
+      border-radius: 20px 20px 0 0;
+      pointer-events: none;
     }
 
     .info-box-header {
@@ -34,9 +52,14 @@
       font-size: 1.5rem;
       font-weight: bold;
       color: #fff;
-      background: linear-gradient(90deg, rgba(180,255,255,0.6), rgba(0,150,255,0.6));
+      background: linear-gradient(
+        90deg,
+        rgba(200, 200, 200, 0.6),
+        rgba(100, 100, 100, 0.5)
+      );
       border-radius: 20px 20px 0 0;
       text-align: center;
+      backdrop-filter: blur(8px);
     }
 
     .info-content {
@@ -66,7 +89,7 @@
       width: 6px;
     }
     .info-content::-webkit-scrollbar-thumb {
-      background: rgba(0, 150, 255, 0.7);
+      background: rgba(100, 100, 100, 0.6);
       border-radius: 4px;
     }
   </style>
@@ -78,8 +101,9 @@
       <div class="info-item"> I’m known as <strong>hatred125</strong> on x.com</div>
       <div class="info-item"> UI designer — I love making clean + modern interfaces</div>
       <div class="info-item"> Scripter — I build systems that just <em>work</em></div>
-      <div class="info-item"> Based in [your region/country]</div>
-      <div class="info-item"> Motto: "UI so good it destroys your other tabs."</div>
+      <div class="info-item"> Based in the United States</div>
+      <div class="info-item"> No save points in my life or my Nintendo 64</div>
+      <div class="info-item"> t.me/n00btube to get in contact with me </div>
     </div>
   </div>
 </body>
