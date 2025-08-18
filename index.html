@@ -1,185 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Right</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Info Box</title>
   <style>
     body {
       margin: 0;
       height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Segoe UI", Arial, sans-serif;
       background: url('https://images3.alphacoders.com/936/936879.jpg') no-repeat center center fixed;
       background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Impact', 'Arial Black', sans-serif;
-      overflow: hidden;
     }
 
-    body::before {
-      content: 'Right';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 160px;
-      color: rgba(255, 255, 255, 0.03);
-      z-index: 0;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    .highlight-box {
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(10px);
+    .info-box {
+      width: 50%;
+      height: 60%;
+      background: rgba(0, 200, 255, 0.3);
       border-radius: 20px;
-      padding: 30px;
+      backdrop-filter: blur(10px) saturate(150%);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      width: 420px;
-      max-height: 85vh;
-      overflow-y: auto;
-      z-index: 1;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     }
 
-    .title {
-      font-size: 36px;
-      color: white;
-      margin-bottom: 10px;
-    }
-
-    .info-card {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      color: white;
-      text-decoration: none;
-      transition: transform 0.25s ease, background 0.25s ease;
-      cursor: pointer;
-      box-shadow: inset 0 0 8px rgba(255,255,255,0.05);
-    }
-
-    .info-card:hover {
-      transform: translateY(-4px) scale(1.02);
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    .info-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .info-card img, 
-    .info-card svg {
-      width: 50px;
-      height: 50px;
-      margin-right: 15px;
-      border-radius: 12px;
-      flex-shrink: 0;
-      fill: white;
-    }
-
-    .info-title {
-      font-size: 20px;
+    .info-box-header {
+      padding: 15px;
+      font-size: 1.5rem;
       font-weight: bold;
+      color: #fff;
+      background: linear-gradient(90deg, rgba(180,255,255,0.6), rgba(0,150,255,0.6));
+      border-radius: 20px 20px 0 0;
+      text-align: center;
     }
 
-    .info-sub {
-      font-size: 14px;
-      color: #ccc;
+    .info-content {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
     }
 
-    .info-text {
-      font-size: 15px;
-      line-height: 1.4;
-      color: #ddd;
-      margin-top: 5px;
+    .info-item {
+      background: rgba(255, 255, 255, 0.6);
+      padding: 12px 15px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      font-size: 1rem;
+      color: #222;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .info-item:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    /* Scrollbar styling */
+    .info-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .info-content::-webkit-scrollbar-thumb {
+      background: rgba(0, 150, 255, 0.7);
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
-  <div class="highlight-box">
-    <div class="title">Right</div>
-
-    <!-- About Me Info Box -->
-    <div class="info-card" style="cursor: default;">
-      <div class="info-header">
-        <img src="https://i.postimg.cc/QMyWBhGY/Logo.webp" alt="Profile Icon">
-        <div>
-          <div class="info-title">About Me</div>
-          <div class="info-sub">A little introduction</div>
-        </div>
-      </div>
-      <div class="info-text">
-        Hey! I’m someone who enjoys UI design, Roblox development, and experimenting with creative projects.  
-        I like keeping things modern, clean, and fun.  
-        You’ll usually find me coding, building games, or trying out new design ideas.  
-        <br><br>
-        Hey! I’m known as <strong>hatred125</strong> on <a href="https://x.com/hatred125" target="_blank" style="color:#1DA1F2; text-decoration:none;">x.com</a>.
-      </div>
+  <div class="info-box">
+    <div class="info-box-header">About Me</div>
+    <div class="info-content">
+      <div class="info-item"> I’m known as <strong>hatred125</strong> on x.com</div>
+      <div class="info-item"> UI designer — I love making clean + modern interfaces</div>
+      <div class="info-item"> Scripter — I build systems that just <em>work</em></div>
+      <div class="info-item"> Based in [your region/country]</div>
+      <div class="info-item"> Motto: "UI so good it destroys your other tabs."</div>
     </div>
-
-    <!-- Roblox -->
-    <a href="https://www.roblox.com/users/4037255/profile" target="_blank" class="info-card">
-      <div class="info-header">
-        <img src="https://i.postimg.cc/QMyWBhGY/Logo.webp" alt="Roblox Icon">
-        <div>
-          <div class="info-title">Roblox</div>
-          <div class="info-sub">Visit my profile</div>
-        </div>
-      </div>
-    </a>
-
-    <!-- Twitter -->
-    <a href="https://x.com/hatred125" target="_blank" class="info-card">
-      <div class="info-header">
-        <img src="https://i.postimg.cc/zGPn5271/image-removebg-preview.png" alt="Twitter Icon">
-        <div>
-          <div class="info-title">Twitter</div>
-          <div class="info-sub">Follow me on X</div>
-        </div>
-      </div>
-    </a>
-
-    <!-- GitHub -->
-    <a href="https://github.com/complicating" target="_blank" class="info-card">
-      <div class="info-header">
-        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 
-            3.58 0 8c0 3.54 2.29 6.53 5.47 
-            7.59.4.07.55-.17.55-.38 0-.19-.01-.82
-            -.01-1.49-2.01.37-2.53-.49-2.69-.94-.09
-            -.23-.48-.94-.82-1.13-.28-.15-.68-.52
-            -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 
-            1.87.87 2.33.66.07-.52.28-.87.51-1.07
-            -1.78-.2-3.64-.89-3.64-3.95 
-            0-.87.31-1.59.82-2.15-.08-.2
-            -.36-1.02.08-2.12 0 0 .67-.21 2.2.82
-            a7.65 7.65 0 012-.27c.68.003 1.36.092 
-            2 .27 1.53-1.04 2.2-.82 
-            2.2-.82.44 1.1.16 1.92.08 
-            2.12.51.56.82 1.27.82 2.15 
-            0 3.07-1.87 3.75-3.65 
-            3.95.29.25.54.73.54 1.48 
-            0 1.07-.01 1.93-.01 2.2 
-            0 .21.15.46.55.38A8.013 
-            8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-        </svg>
-        <div>
-          <div class="info-title">GitHub</div>
-          <div class="info-sub">Check out my code</div>
-        </div>
-      </div>
-    </a>
-
   </div>
 </body>
 </html>
