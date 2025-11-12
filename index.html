@@ -1,173 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Connections</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: url('https://images3.alphacoders.com/936/936879.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-    }
-    .info-box {
-      width: 65%;
-      max-width: 900px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 25px;
-      backdrop-filter: blur(20px) saturate(160%);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .info-box-header {
-      font-size: 1.7rem;
-      font-weight: bold;
-      text-align: center;
-      padding: 18px;
-      background: linear-gradient(90deg, rgba(200,200,200,0.4), rgba(120,120,120,0.3));
-      backdrop-filter: blur(10px);
-    }
-    .info-content {
-      display: flex;
-      flex-direction: row;
-      padding: 25px;
-      gap: 25px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .section {
-      flex: 1;
-      min-width: 280px;
-      background: rgba(255,255,255,0.15);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-    }
-    .section h2 {
-      font-size: 1.3rem;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-      padding-bottom: 8px;
-      margin-bottom: 12px;
-    }
-    .discord {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .discord img {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    }
-    .discord-info { display: flex; flex-direction: column; }
-    .discord-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 6px;
-    }
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    .status-online { background: #43b581; box-shadow: 0 0 10px #43b581; animation: pulse 1.5s infinite; }
-    .status-idle { background: #faa61a; box-shadow: 0 0 10px #faa61a; animation: pulse 1.5s infinite; }
-    .status-dnd { background: #f04747; box-shadow: 0 0 10px #f04747; animation: pulse 1.5s infinite; }
-    .status-offline { background: #747f8d; }
-    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0.7;} }
-    .activity { font-style: italic; opacity: 0.85; margin-top: 6px; }
-    .mc-preview { text-align: center; cursor: pointer; }
-    .mc-preview img {
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.35);
-      width: 150px;
-      height: 300px;
-      object-fit: contain;
-    }
-    .mc-name { margin-top: 10px; font-weight: bold; letter-spacing: 0.5px; }
-    @media (max-width: 768px) { .info-content { flex-direction: column; align-items: center; } }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Connections</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: url('https://images3.alphacoders.com/936/936879.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+  }
+  .info-box {
+    width: 65%;
+    max-width: 900px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 25px;
+    backdrop-filter: blur(20px) saturate(160%);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .info-box-header {
+    font-size: 1.7rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 18px;
+    background: linear-gradient(90deg, rgba(200,200,200,0.4), rgba(120,120,120,0.3));
+    backdrop-filter: blur(10px);
+  }
+  .info-content {
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .section {
+    flex: 1;
+    min-width: 280px;
+    background: rgba(255,255,255,0.15);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  }
+  .section h2 {
+    font-size: 1.3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+  .discord {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .discord img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  }
+  .discord-info { display: flex; flex-direction: column; }
+  .discord-status { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .status-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .status-online { background: #43b581; box-shadow: 0 0 10px #43b581; animation: pulse 1.5s infinite; }
+  .status-idle { background: #faa61a; box-shadow: 0 0 10px #faa61a; animation: pulse 1.5s infinite; }
+  .status-dnd { background: #f04747; box-shadow: 0 0 10px #f04747; animation: pulse 1.5s infinite; }
+  .status-offline { background: #747f8d; }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0.7;} }
+  .activity { font-style: italic; opacity: 0.85; margin-top: 6px; }
+  .mc-preview { text-align: center; }
+  .mc-preview img {
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.35);
+    width: 150px;
+    height: 300px;
+    object-fit: contain;
+  }
+  .mc-name { margin-top: 10px; font-weight: bold; letter-spacing: 0.5px; }
+  @media (max-width: 768px) { .info-content { flex-direction: column; align-items: center; } }
+</style>
 </head>
 <body>
-  <div class="info-box">
-    <div class="info-box-header">Connections</div>
-    <div class="info-content">
+<div class="info-box">
+  <div class="info-box-header">Connections</div>
+  <div class="info-content">
 
-      <!-- Discord Section -->
-      <div class="section">
-        <h2>My Discord</h2>
-        <div class="discord">
-          <img id="discord-avatar" src="https://cdn.discordapp.com/embed/avatars/5.png" alt="Avatar" />
-          <div class="discord-info">
-            <div id="discord-username">Loading...</div>
-            <div class="discord-status">
-              <div id="discord-status-dot" class="status-dot status-offline"></div>
-              <span id="discord-status-text">Offline</span>
-            </div>
-            <div id="discord-activity" class="activity"></div>
+    <!-- Discord Section -->
+    <div class="section">
+      <h2>My Discord</h2>
+      <div class="discord">
+        <img id="discord-avatar" src="https://cdn.discordapp.com/embed/avatars/5.png" alt="Avatar" />
+        <div class="discord-info">
+          <div id="discord-username">Loading...</div>
+          <div class="discord-status">
+            <div id="discord-status-dot" class="status-dot status-offline"></div>
+            <span id="discord-status-text">Offline</span>
           </div>
+          <div id="discord-activity" class="activity"></div>
         </div>
       </div>
-
-      <!-- Minecraft Section -->
-      <div class="section">
-        <h2>Minecraft Account</h2>
-        <div class="mc-preview" onclick="window.open('https://namemc.com/profile/brbr.5', '_blank')">
-          <img id="mc-skin" src="https://crafatar.com/renders/body/087ea6bd-f680-43ba-8470-e525969e29a9" alt="Minecraft Skin" />
-          <div class="mc-name">brbr</div>
-        </div>
-      </div>
-
     </div>
+
+    <!-- Minecraft Section -->
+    <div class="section">
+      <h2>Minecraft Account</h2>
+      <div class="mc-preview">
+        <img id="mc-skin" src="https://crafatar.com/renders/body/087ea6bd-f680-43ba-8470-e525969e29a9" alt="Minecraft Skin" />
+        <div class="mc-name">brbr</div>
+      </div>
+    </div>
+
   </div>
+</div>
 
-  <script>
-    // Typing title animation
-    const titles = ["Welcome to My Page!"];
-    let tIndex = 0, cIndex = 0, typingForward = true;
-    function typeTitle() {
-      const t = titles[tIndex];
-      if (typingForward) {
-        cIndex++;
-        if (cIndex > t.length) { typingForward = false; setTimeout(typeTitle, 1500); return; }
-      } else {
-        cIndex--;
-        if (cIndex === 0) { typingForward = true; tIndex = (tIndex+1)%titles.length; }
-      }
-      document.title = t.slice(0, cIndex);
-      setTimeout(typeTitle, typingForward ? 150 : 75);
-    }
-    typeTitle();
+<script>
+const MY_USER_ID = "1436541075782238251"; // Replace with your Discord ID
 
-    // Fetch Discord status from local Python server
-    async function loadDiscord() {
-      try {
-        const res = await fetch("http://localhost:3000/status");
-        const data = await res.json();
+async function loadDiscord() {
+  try {
+    const res = await fetch("http://localhost:3000/status");
+    const data = await res.json();
 
-        document.getElementById("discord-avatar").src = data.avatar || "https://cdn.discordapp.com/embed/avatars/5.png";
-        document.getElementById("discord-username").textContent = data.username || "Unknown#0000";
-        document.getElementById("discord-status-text").textContent = data.status || "offline";
-        document.getElementById("discord-status-dot").className = `status-dot status-${data.status || "offline"}`;
-        document.getElementById("discord-activity").textContent = data.activity ? `Activity: ${data.activity}` : "";
-      } catch(err) {
-        console.error("Failed to fetch Discord data:", err);
-      }
-    }
+    const me = data[MY_USER_ID];
+    if (!me) return; // if user not found
 
-    loadDiscord();
-    setInterval(loadDiscord, 5000);
-  </script>
+    document.getElementById("discord-avatar").src = me.avatar || "https://cdn.discordapp.com/embed/avatars/5.png";
+    document.getElementById("discord-username").textContent = me.username || "Unknown#0000";
+    document.getElementById("discord-status-text").textContent = me.status || "offline";
+    document.getElementById("discord-status-dot").className = `status-dot status-${me.status || "offline"}`;
+    document.getElementById("discord-activity").textContent = me.activity ? `Activity: ${me.activity}` : "";
+  } catch (err) {
+    console.error("Failed to load Discord data:", err);
+  }
+}
+
+loadDiscord();
+setInterval(loadDiscord, 5000); // refresh every 5s
+</script>
 </body>
 </html>
