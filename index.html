@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title></title>
+<title>Connections</title>
 <style>
   * { box-sizing: border-box; }
   body {
@@ -88,11 +88,7 @@
   .status-idle { background: #faa61a; }
   .status-dnd { background: #f04747; }
   .status-offline { background: #747f8d; }
-  .activity {
-    font-style: italic;
-    opacity: 0.85;
-    margin-top: 6px;
-  }
+  .activity { font-style: italic; opacity: 0.85; margin-top: 6px; }
   .mc-preview { text-align: center; }
   .mc-preview img {
     border-radius: 12px;
@@ -101,18 +97,15 @@
     height: 300px;
     object-fit: contain;
   }
-  .mc-name {
-    margin-top: 10px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
+  .mc-name { margin-top: 10px; font-weight: bold; letter-spacing: 0.5px; }
+  @media (max-width: 768px) { .info-content { flex-direction: column; align-items: center; } }
+  .online-glow { box-shadow: 0 0 20px #43b581aa, 0 0 40px #43b58177; animation: pulse 1.5s infinite; }
+  .idle-glow { box-shadow: 0 0 20px #faa61aaa, 0 0 40px #faa61a77; animation: pulse 1.5s infinite; }
+  .dnd-glow { box-shadow: 0 0 20px #f04747aa, 0 0 40px #f0474777; animation: pulse 1.5s infinite; }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
   }
-  @media (max-width: 768px) {
-    .info-content { flex-direction: column; align-items: center; }
-  }
-  /* Animated glow effect for Discord card */
-  .online-glow { box-shadow: 0 0 20px #43b581aa, 0 0 40px #43b58177; }
-  .idle-glow { box-shadow: 0 0 20px #faa61aaa, 0 0 40px #faa61a77; }
-  .dnd-glow { box-shadow: 0 0 20px #f04747aa, 0 0 40px #f0474777; }
 </style>
 </head>
 <body>
@@ -140,7 +133,9 @@
     <div class="section">
       <h2>Minecraft</h2>
       <div class="mc-preview">
-        <img id="mc-skin" src="" alt="Minecraft Skin" />
+        <a href="https://namemc.com/profile/brbr.5" target="_blank">
+          <img id="mc-skin" src="https://crafatar.com/renders/body/087ea6bd-f680-43ba-8470-e525969e29a9?size=300&overlay" alt="Minecraft Skin" />
+        </a>
         <div class="mc-name">brbr.5</div>
       </div>
     </div>
@@ -149,34 +144,7 @@
 </div>
 
 <script>
-  // Typing title animation
-  const titles = ["Welcome to My Page!"];
-  let tIndex = 0, cIndex = 0, typingForward = true;
-  function typeTitle() {
-    const t = titles[tIndex];
-    if (typingForward) { cIndex++; if(cIndex > t.length){ typingForward=false; setTimeout(typeTitle,1500); return; } }
-    else { cIndex--; if(cIndex===0){ typingForward=true; tIndex=(tIndex+1)%titles.length; } }
-    document.title = t.slice(0,cIndex);
-    setTimeout(typeTitle, typingForward?150:75);
-  }
-  typeTitle();
-
-  // ---------- Minecraft skin loader ----------
-  const mcUsername = "brbr";
-  async function updateSkin() {
-    try {
-      const res = await fetch(`https://api.mojang.com/users/profiles/minecraft/${mcUsername}`);
-      if(!res.ok) throw new Error("User not found");
-      const data = await res.json();
-      const uuid = data.id;
-      document.getElementById("mc-skin").src = `https://crafatar.com/renders/body/${uuid}?size=300&overlay`;
-      document.querySelector(".mc-name").textContent = mcUsername;
-    } catch(err) { console.error("Minecraft fetch error:", err); }
-  }
-  updateSkin();
-
-  // ---------- Discord presence loader ----------
-  const discordUserId = "1436541075782238251"; // Replace with your Discord ID
+  const discordUserId = "YOUR_DISCORD_USER_ID"; // Replace with your numeric ID
 
   async function loadDiscord() {
     try {
@@ -186,22 +154,14 @@
 
       const user = data.data.discord_user;
       const status = data.data.discord_status;
-      const activity = data.data.activities?.[0]?.name || "Idle";
+      const activity = data.data.activities?.[0]?.name || "";
 
-      // Update avatar and username
       document.getElementById("discord-avatar").src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
       document.getElementById("discord-username").textContent = `${user.username}#${user.discriminator}`;
-
-      // Update status
-      const statusText = status.charAt(0).toUpperCase() + status.slice(1);
-      document.getElementById("discord-status-text").textContent = statusText;
-      const statusDot = document.getElementById("discord-status-dot");
-      statusDot.className = `status-dot status-${status}`;
-
-      // Update activity
+      document.getElementById("discord-status-text").textContent = status.charAt(0).toUpperCase()+status.slice(1);
+      document.getElementById("discord-status-dot").className = `status-dot status-${status}`;
       document.getElementById("discord-activity").textContent = activity ? `Activity: ${activity}` : "";
 
-      // Add glow effect
       const card = document.getElementById("discord-card");
       card.classList.remove("online-glow","idle-glow","dnd-glow");
       if(status==="online") card.classList.add("online-glow");
