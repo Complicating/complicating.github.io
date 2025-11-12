@@ -1,13 +1,8 @@
-## Knife
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title></title>
   <style>
     * {
@@ -27,10 +22,10 @@
     }
 
     .info-box {
-      width: 60%;
-      max-width: 800px;
+      width: 65%;
+      max-width: 900px;
       background: rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
+      border-radius: 25px;
       backdrop-filter: blur(20px) saturate(160%);
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
       overflow: hidden;
@@ -72,16 +67,34 @@
       margin-bottom: 12px;
     }
 
+    .discord {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .discord img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .discord-info {
+      display: flex;
+      flex-direction: column;
+    }
+
     .discord-status {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-top: 10px;
+      gap: 8px;
+      margin-top: 6px;
     }
 
     .status-dot {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
     }
 
@@ -90,11 +103,28 @@
     .status-dnd { background: #f04747; }
     .status-offline { background: #747f8d; }
 
-    iframe {
-      border: none;
-      border-radius: 10px;
-      width: 100%;
-      height: 380px;
+    .activity {
+      font-style: italic;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+
+    .mc-preview {
+      text-align: center;
+    }
+
+    .mc-preview img {
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.35);
+      width: 150px;
+      height: 300px;
+      object-fit: contain;
+    }
+
+    .mc-name {
+      margin-top: 10px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
     }
 
     @media (max-width: 768px) {
@@ -113,25 +143,33 @@
       <!-- Discord Section -->
       <div class="section">
         <h2>Discord</h2>
-        <div id="discord-username">Loading...</div>
-        <div class="discord-status">
-          <div id="discord-status-dot" class="status-dot status-offline"></div>
-          <span id="discord-status-text">Offline</span>
+        <div class="discord">
+          <img id="discord-avatar" src="" alt="Avatar" />
+          <div class="discord-info">
+            <div id="discord-username">Loading...</div>
+            <div class="discord-status">
+              <div id="discord-status-dot" class="status-dot status-offline"></div>
+              <span id="discord-status-text">Offline</span>
+            </div>
+            <div id="discord-activity" class="activity"></div>
+          </div>
         </div>
-        <div id="discord-activity" style="margin-top:10px; font-style:italic; opacity:0.8;"></div>
       </div>
 
       <!-- Minecraft Section -->
       <div class="section">
         <h2>Minecraft</h2>
-        <iframe src="https://namemc.com/profile/brbr"></iframe>
+        <div class="mc-preview">
+          <img id="mc-skin" src="https://mc-heads.net/body/brbr" alt="Minecraft Skin" />
+          <div class="mc-name">yourMinecraftNameHere</div>
+        </div>
       </div>
 
     </div>
   </div>
 
   <script>
-    // Typing animation for title
+    // Typing title animation
     const titles = ["Welcome to My Page!"];
     let tIndex = 0, cIndex = 0, typingForward = true;
     function typeTitle() {
@@ -155,8 +193,8 @@
     }
     typeTitle();
 
-    // Discord presence via Lanyard API
-    const discordUserId = "1436541075782238251"; // Replace with your Discord ID
+    // Discord presence using Lanyard API
+    const discordUserId = "1436541075782238251"; // Replace with your actual Discord ID
 
     async function loadDiscord() {
       try {
@@ -166,14 +204,15 @@
 
         const user = data.data.discord_user;
         const status = data.data.discord_status;
-        const activity = data.data.activities?.[0]?.name || "No current activity";
+        const activity = data.data.activities?.[0]?.name || "Idle";
 
+        document.getElementById("discord-avatar").src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
         document.getElementById("discord-username").textContent = `${user.username}#${user.discriminator}`;
         document.getElementById("discord-status-text").textContent = status.charAt(0).toUpperCase() + status.slice(1);
         document.getElementById("discord-status-dot").className = `status-dot status-${status}`;
         document.getElementById("discord-activity").textContent = `Activity: ${activity}`;
-      } catch (e) {
-        console.error("Discord fetch error:", e);
+      } catch (err) {
+        console.error("Discord fetch error:", err);
       }
     }
 
