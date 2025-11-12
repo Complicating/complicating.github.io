@@ -58,45 +58,51 @@
       padding-bottom: 8px;
       margin-bottom: 12px;
     }
-    .discord {
+    .socials {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .social-link {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+      transition: 0.2s;
     }
-    .discord img {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    .social-link img {
+      width: 32px;
+      height: 32px;
     }
-    .discord-info { display: flex; flex-direction: column; }
-    .discord-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 6px;
+    .social-link:hover {
+      transform: scale(1.05);
+      opacity: 0.85;
     }
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
+    .mc-preview {
+      text-align: center;
     }
-    .status-online { background: #43b581; box-shadow: 0 0 10px #43b581; animation: pulse 1.5s infinite; }
-    .status-idle { background: #faa61a; box-shadow: 0 0 10px #faa61a; animation: pulse 1.5s infinite; }
-    .status-dnd { background: #f04747; box-shadow: 0 0 10px #f04747; animation: pulse 1.5s infinite; }
-    .status-offline { background: #747f8d; }
-    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0.7;} }
-    .activity { font-style: italic; opacity: 0.85; margin-top: 6px; }
-    .mc-preview { text-align: center; }
     .mc-preview img {
       border-radius: 12px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.35);
       width: 150px;
       height: 300px;
       object-fit: contain;
+      cursor: pointer;
+      transition: 0.2s;
     }
-    .mc-name { margin-top: 10px; font-weight: bold; letter-spacing: 0.5px; }
-    @media (max-width: 768px) { .info-content { flex-direction: column; align-items: center; } }
+    .mc-preview img:hover {
+      transform: scale(1.05);
+    }
+    .mc-name { 
+      margin-top: 10px; 
+      font-weight: bold; 
+      letter-spacing: 0.5px; 
+      text-align: center; 
+    }
+    @media (max-width: 768px) { 
+      .info-content { flex-direction: column; align-items: center; } 
+    }
   </style>
 </head>
 <body>
@@ -104,76 +110,41 @@
     <div class="info-box-header">Connections</div>
     <div class="info-content">
 
-      <!-- Discord Section -->
+      <!-- Socials Section -->
       <div class="section">
-        <h2>My Discord</h2>
-        <div class="discord">
-          <img id="discord-avatar" src="https://cdn.discordapp.com/embed/avatars/5.png" alt="Avatar" />
-          <div class="discord-info">
-            <div id="discord-username">Loading...</div>
-            <div class="discord-status">
-              <div id="discord-status-dot" class="status-dot status-offline"></div>
-              <span id="discord-status-text">Offline</span>
-            </div>
-            <div id="discord-activity" class="activity"></div>
-          </div>
+        <h2>My Socials</h2>
+        <div class="socials">
+          <a class="social-link" href="https://discord.com/users/1436541075782238251" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
+            Discord
+          </a>
+          <a class="social-link" href="https://twitter.com/knife" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter">
+            Twitter
+          </a>
+          <a class="social-link" href="https://github.com/complicating" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub">
+            GitHub
+          </a>
+          <a class="social-link" href="https://www.youtube.com/@autoclaimers" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube">
+            YouTube
+          </a>
         </div>
       </div>
 
       <!-- Minecraft Section -->
       <div class="section">
-        <h2>Minecraft Account</h2>
+        <h2>My Minecraft Account</h2>
         <div class="mc-preview">
-          <img id="mc-skin" src="https://crafatar.com/renders/body/087ea6bd-f680-43ba-8470-e525969e29a9" alt="Minecraft Skin" />
+          <a href="https://namemc.com/profile/brbr.5" target="_blank">
+            <img src="https://crafatar.com/renders/body/087ea6bd-f680-43ba-8470-e525969e29a9" alt="Minecraft Skin" />
+          </a>
           <div class="mc-name">brbr</div>
         </div>
       </div>
 
     </div>
   </div>
-
-  <script>
-    // Typing title animation
-    const titles = ["Welcome to My Page!"];
-    let tIndex = 0, cIndex = 0, typingForward = true;
-    function typeTitle() {
-      const t = titles[tIndex];
-      if (typingForward) {
-        cIndex++;
-        if (cIndex > t.length) { typingForward = false; setTimeout(typeTitle, 1500); return; }
-      } else {
-        cIndex--;
-        if (cIndex === 0) { typingForward = true; tIndex = (tIndex+1)%titles.length; }
-      }
-      document.title = t.slice(0, cIndex);
-      setTimeout(typeTitle, typingForward ? 150 : 75);
-    }
-    typeTitle();
-
-    // Fetch Discord presence for a specific user from your bot
-    const MY_USER_ID = "1436541075782238251"; // Replace with your Discord ID
-
-    async function loadDiscord() {
-      try {
-        const res = await fetch("http://localhost:3000/status");
-        const data = await res.json();
-
-        // Filter only your user ID
-        const me = data[MY_USER_ID];
-        if (!me) return;
-
-        document.getElementById("discord-avatar").src = me.avatar || "https://cdn.discordapp.com/embed/avatars/5.png";
-        document.getElementById("discord-username").textContent = me.username || "Unknown#0000";
-        document.getElementById("discord-status-text").textContent = me.status || "offline";
-        document.getElementById("discord-status-dot").className = `status-dot status-${me.status || "offline"}`;
-        document.getElementById("discord-activity").textContent = me.activity ? `Activity: ${me.activity}` : "";
-      } catch (err) {
-        console.error("Failed to load Discord data:", err);
-      }
-    }
-
-    loadDiscord();
-    setInterval(loadDiscord, 5000);
-  </script>
 </body>
 </html>
